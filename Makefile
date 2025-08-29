@@ -8,11 +8,14 @@ LDFLAGS :=
 
 export TARGET CC CFLAGS LDFLAGS
 
-.PHONY: all clean
+.PHONY: all install clean
 
 all:
 	make $@ -C src
 	mv src/$(TARGET) .
+
+install: all
+	cp $(TARGET) /usr/local/bin
 
 clean:
 	make $@ -C src

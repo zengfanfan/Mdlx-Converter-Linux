@@ -1410,7 +1410,7 @@ public:
 	//int textureID;      //  +32:unfogged;+64:NoDepthTest;+128:NoDepthSet)
 	int tVertexAnimId;	// 0xFFFFFFFF if none
 	int coordId;
-	//float alpha;	
+	//float alpha;
 	KMTA kmta; // alpha
 	KMTF kmtf; // textureID
 
@@ -1759,7 +1759,7 @@ public:
 		int end = start + MdxReadInt(in);
 		name = MdxReadString(in, 80);
 
-		//ASSERT (name.length()!=0) 
+		//ASSERT (name.length()!=0)
 
 		objectID = MdxReadInt(in);
 		parent = MdxReadInt(in);
@@ -5511,7 +5511,7 @@ public:
 		char tag[5];
 		tag[4] = 0;
 		in.read(tag, 4);
-		cout << "Tag: " << tag << endl;
+		// cout << "Tag: " << tag << endl;
 		if (strcmp(tag, "MDLX") != 0) return;
 		// int i = 0;
 		while (in.eof() == false)
@@ -5521,7 +5521,7 @@ public:
 			{
 				break;
 			}
-			cout << "Tag: " << tag << endl;
+			// cout << "Tag: " << tag << endl;
 			if (strcmp(tag, "VERS") == 0) {
 				vers.MdxRead(in);
 			}
