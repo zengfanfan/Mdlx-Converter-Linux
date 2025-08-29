@@ -1,4 +1,5 @@
 #pragma once
+
 #pragma warning(disable: 4786)
 #include <string>
 #include <vector>

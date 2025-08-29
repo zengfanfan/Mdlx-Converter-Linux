@@ -1,6 +1,4 @@
-#ifndef MDLXDATA_H
-#define MDLXDATA_H
-
+#pragma once
 
 /*
 
@@ -30,6 +28,18 @@
 
 */
 
+#include <cstdarg>
+#include <cassert>
+#include "MdlLine.h"
+#include "MdlError.h"
+
+using std::cout;
+using std::endl;
+using std::ifstream;
+using std::ios;
+using std::ofstream;
+using std::string;
+using std::vector;
 
 #define FILTER_NONE 0
 #define FILTER_TRANSPARENT 1
@@ -95,26 +105,6 @@
 #define TAGINT(t)	(t[0]|(t[1]<<8)|(t[2]<<16)|(t[3]<<24))
 #define MDLREAD(type, holder)	type newOb; newOb.MdlRead(in, line, err); holder.push_back(newOb);
 #define MDXREAD(type, holder)	int count = MdxReadInt(in); int end = (int)in.tellg() + count; while (in.tellg()<end) {	type newOb; newOb.MdxRead(in); holder.push_back(newOb);	} assert((int)in.tellg()==end);
-
-
-
-#include <cstdarg>
-#include <fstream>
-#include <vector>
-#include <cassert>
-#include "MdlLine.h"
-#include "MdlError.h"
-#include <ctime>
-#include <iostream>
-#include <sstream>
-
-using std::ifstream;
-using std::ofstream;
-using std::vector;
-using std::string;
-using std::cout;
-using std::endl;
-using std::ios;
 
 class Chunk {
 public:
@@ -5895,7 +5885,7 @@ public:
 		} while (line->type != LINE_EOF && !err->critical);
 
 		// Error report
-		printf("%d errors\n", err->errorLine.size());
+		if (err->errorLine.size() > 0) printf("%d errors\n", err->errorLine.size());
 		for (int i = 0; i < err->errorLine.size(); i++)
 		{
 			cout << "  Line " << err->errorLineNum[i] << ": " << err->errorLine[i].c_str() << endl;
@@ -6086,5 +6076,3 @@ public:
 	}
 #endif
 };
-
-#endif

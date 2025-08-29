@@ -1,4 +1,15 @@
 #pragma once
+
+#pragma warning(disable: 4786)
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <cstring>
+
+using std::ifstream;
+using std::string;
+using std::vector;
+
 #define LINE_EOF                    (-1)
 #define LINE_ERROR					0
 #define LINE_OPENER					1 // Geoset {
@@ -20,16 +31,6 @@
 #define IS_INT						0x00000002
 #define IS_LABEL					0x00000004
 #define IS_CHAR						0x00000008
-
-#pragma warning(disable: 4786)
-#include <vector>
-#include <string>
-#include <fstream>
-#include <sstream>
-
-using std::string;
-using std::vector;
-using std::ifstream;
 
 
 class MdlLine
@@ -185,6 +186,7 @@ inline void MdlLine::init(string line)
 
 	while (true) {
 		string thisWord = getWord(&currChar, lineTrimmed);
+		if (thisWord.length() == 1 && thisWord[0] == '\r') continue; // ignore \r in CRLF files
 		if (thisWord.length() == 0) break;
 
 		int thisType = 0;
